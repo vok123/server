@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+const program = require('commander');
+const main = require('../lib/main.js');
+const open = require('open');
+
+program
+  .version(require('../package').version)
+  .usage('[entry]')
+  .option('-p, --port [port]', 'Type port !')
+  .option('-o, --open [--open]', 'Auto open browser')
+  .option('-a, --allowOrigin [--allowOrigin]', 'Allow-Origin *')
+  .option('-h, --history [history]', 'Type -h enable history mode !')
+  .parse(process.argv);
+
+program.port = (program.port > 0 && program.port != true) ? program.port : 8080;
+// 监测端口是否被占用
+main.checkPort(program.port).then(() => {
+  main.createServer(program);
+  if (program.open) {
+    open(`http://localhost:${program.port}`);
+  }
+}).catch((err) => {
+  console.log(new Error(err));
+});
