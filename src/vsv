@@ -7,7 +7,7 @@ program
   .version(require('../package').version)
   .usage('[entry]')
   .option('-p, --port [port]', 'Type port !')
-  .option('-o, --open [--open]', 'Auto open browser')
+  .option('-o, --open [--open]', 'Auto open default browser')
   .option('-a, --allowOrigin [--allowOrigin]', 'Allow-Origin *')
   .option('-h, --history [history]', 'Type -h enable history mode !')
   .parse(process.argv);
